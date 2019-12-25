@@ -1,0 +1,9 @@
+{
+    "name": "pdfscanner/pdf",
+    "type": "project",
+    "require": {
+    	"gufy/pdftohtml-php":"~2",
+        "spatie/pdf-to-text": "^1.2",
+        "stichoza/google-translate-php": "^4.0"
+    }
+}
