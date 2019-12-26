@@ -28,12 +28,28 @@ body {
 	height: 600px
 }
 
-form {	
+/*form {	
 	padding: 20px;
 	border: 1px solid #B0C4DE;
 	background: white;
 	border-radius: 0px 0px 10px 10px;
-    margin-top: 19px;
+    margin: auto;
+    width: 80%
+}*/
+.label {
+  color: white;
+  padding: 8px;
+  font-family: Arial;
+}
+.danger {background-color: #f44336;}
+
+.login {	
+	padding: 20px;
+	border: 1px solid #B0C4DE;
+	background: white;
+	border-radius: 0px 0px 10px 10px;
+    margin: auto;
+    width: 80%
 }
 .input-group {
 	margin: 10px 0px 10px 0px;
@@ -85,19 +101,43 @@ form {
 	border: 1px solid #3c763d;
 	margin-bottom: 20px;
 }
+.pic img {
+	width: 100%;
+    height: 100%;
+        margin-left: 16px;
 
-.profile_info img {
+}
+
+.user_pic	 {
 	display: inline-block; 
 	width: 50px; 
 	height: 50px; 
 	margin: 5px;
 	float: left;
 }
-
-.profile_info div {
-	display: inline-block; 
-	margin: 5px;
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+	margin: 16px 14px;
+	cursor: pointer;
+	height: 10px;
 }
+
+input[type=button], input[type=submit] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.other {background-color: white; color: black;}
 
 .profile_info:after {
 	content: "";
@@ -115,7 +155,6 @@ form {
 
 .pic{
     width: 100px;
-    background-color: aqua;
     height: 100px;
 }
 
@@ -175,7 +214,7 @@ div.login section input {
 	margin-bottom: 10px;
 }
 
-.button {
+.submit-button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;

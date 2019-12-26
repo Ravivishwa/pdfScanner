@@ -10,7 +10,7 @@
 		<h2>Register</h2>
 	</div>
 	
-	<form method="post" action="register.php">
+	<form method="post" action="register.php" class="login">
 
 		<?php echo display_error(); ?>
 

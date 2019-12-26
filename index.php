@@ -5,6 +5,22 @@
 		$_SESSION['msg'] = "You must log in first";
 		header('location: login.php');
 	}
+
+	$userid = $_SESSION['user']['id'];
+	$targetDir = "uploads/".$userid ;
+	$imagePath =$targetDir;
+
+	$query = "SELECT * FROM user_data where user_id = $userid ORDER BY id DESC LIMIT 1";
+	$result = mysqli_query($db, $query);
+	while($row=mysqli_fetch_array($result)){
+    	$name = $row['name'];
+    	$card_name = $row['card_name'];
+    	$card_type = $row['card_type'];
+    	$father_name = $row['father_name'];
+    	$dob = $row['dob'];
+    	$shop_code = $row['shop_code'];
+    	$address = $row['address'];
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +47,7 @@
 		<?php endif ?>
 		<!-- logged in user information -->
 		<div class="profile_info">
-			<img src="images/user_profile.png"  >
+			<img class="user_pic" src="images/user_profile.png"  >
 		<?php  if (isset($_SESSION['user'])) : ?>
 			<div>
 				
@@ -42,12 +58,13 @@
 						<a href="index.php?logout='1'" style="color: red;">logout</a>
 					</small>				
 			</div>
-			<form method="post" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data" class="login">
 			    Select PDF File to Upload:
 			    <input id="sortpicture" type="file" name="sortpic" />
 			    <input type="submit" name="submit" id= "upload" value="Upload">
 			</form>
 			<?php endif ?>
+	<div class="app"><span class="label danger" style="display: none;">Invalid Pdf</span></div>
 	<div class="application_container" style="display: none;">
 		<div class="app">Application</div>
 				<div class="presentation">
@@ -55,20 +72,20 @@
 						<table style="width: 100%" class="memt">
 							<tbody>
 								<tr>
-									<td>Name :</td>
-									<td>Card Number</td>
+									<td>Name : <span class="name"></span></td>
+									<td>Card Number : <span class="card_name"></span></td>
 								</tr>
 								<tr>
-									<td>Father Name :</td>
-									<td>Card Type :</td>
+									<td>Father Name : <span class="father_name"></span></td>
+									<td>Card Type : <span class="card_type"></span></td>
 								</tr>
 								<tr>
-									<td>Date of Birth :</td>
-									<td>Shop No :</td>
+									<td>Date of Birth : <span class="dob"></span></td>
+									<td>Shop No : <span class="shop_code"></span></td>
 								</tr>
 								<tr>
-									<td>Address :</td>
-									<td>year :</td>
+									<td><div style="display: inline-block;">Address : </div><div class="address" style="width: 191px; margin: -22px 0px 0px 87px;"></div></td>
+									<td><div style="margin-top: -68px;">Year : <span class="year">2010</span></div></td>
 								</tr>
 								<tr>
 									<td>Member Details :</td>
@@ -76,8 +93,11 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<td>
-										<button class="button">Submit</button>					
+									<td style="float: right;">
+										<form method="post" enctype="multipart/form-data" action="pdf.php" >
+			    <input id="hidden" type="text" name="hidden" style = "display: none" value = '<div class="print"><section style="width: 9%;float: left;"><div class="pic" style="width: 100px;height:100px;"><img class="pro-pic" style ="width: 100%;height: 100%;margin-left: -38px;" src="uploads/2/333209874001.01.jpg" /><span class="label other" style="margin-left: 0px; margin-top:20px;border:1px solid black">Other</span><br><span class="label other" style="margin-left: 0px; margin-top:9px;border:1px solid black">Other</span><br></div></section><section style="width: 80%;float: right;"><table style="width:80%" class="table_1print"><tbody><tr><td style="width:40%">Name</td> <td> :<?php echo $name; ?></td></tr><tr><td style="width:40%">Father Name</td><td> : </td></tr><tr><td style="width:40%">Date of Birth</td><td> : </td></tr><tr><td style="width:40%">Address</td><td> : </td></tr><tr><td style="margin-left:">Member Details</td></tr></tbody></table></section><div class="page_break" style="page-break-before: always;"></div><div style="margin-left:-51px ;position: absolute;"><ul><li>aaa</li><li>aaa</li><li>aaa</li></ul></div><div class="qr-pic" style="width: 100px;height:100px;margin-left:120px;position: absolute"><div class="qr-pic" style="width: 100px;height:100px;margin-left:15px;position: absolute">sdsdsdsdsd</div><div class="qr-pic" style="margin-left:15px;margin-top: 20px;position: absolute">sdsdsdsdsd</div><img class="pro-pic" style ="margin-top :50px;width: 100px;height: 100px;" src="uploads/2/333209874001.01.jpg" /></div>'/>
+			    <input type="submit" name="submit" id= "Submit" value="Submit">											
+										</form>
 									</td>									
 								</tr>
 							</tfoot>																		
@@ -86,34 +106,40 @@
 				</div>
 
 				<div class="right">
-					<div class="login">
-						<section>
-						</section>
-					</div>
-					
 					<div class="categories">
 						<section>
-							<div class="pic"></div>
 							<div class="pic">
-								<img class="qr-pic" src="" />
+								<img class="pro-pic"src="C:\xampp\htdocs\pdfScanner\uploads\uploads\2\333209874001.01.jpg" />
 							</div>
-								<div class="upload-button">Upload Image</div>
-								<input class="file-upload" type="file" accept="image/*"/>				
+							<div class="pic">
+								<img class="qr-pic"src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" alt ="qr code"/>							
+							</div>
+								<div class="upload-button">Upload Qr Code</div>
+								<input class="file-upload" type="file" accept="image/*"/>			
 						</section>
 					</div>
 				</div>			
 			</div>
 		</div>
-	</div>
+	</div>	
+</div>
+</div>
+
+
+<?php
+$html = '<div class="print"><section style="width: 9%;float: left;"><div class="pic" style="width: 100px;height:100px;"><img class="pro-pic" style ="width: 100%;height: 100%;margin-left: -38px;" src="uploads/2/333209874001.01.jpg" /><span class="label other" style="margin-left: 0px; "margin-top:9px";position: absolute;border:1px solid black">Other</span><br><span class="label other" style="margin-left: 0px; "margin-top:9px";position: absolute;border:1px solid black">Other</span><br></div></section><section style="width: 80%;float: right;"><table style="width:80%" class="table_1print"><tbody><tr><td style="width:40%">Name</td> <td> : </td></tr><tr><td style="width:40%">Father Name</td><td> : </td></tr><tr><td style="width:40%">Date of Birth</td><td> : </td></tr><tr><td style="width:40%">Address</td><td> : </td></tr><tr><td style="margin-left:">Member Details</td></tr></tbody></table></section></div>'
+	?>
+</form>
 </body>
 </html>
 
-<script type="text/javascript">
+<script>
 	$('#upload').on('click', function(e) {
-		e.preventDefault();
-		console.log("sdsd")
+	e.preventDefault();
     var file_data = $('#sortpicture').prop('files')[0];   
-    var form_data = new FormData();                  
+    var form_data = new FormData();  
+    var imagePath = "<?php echo $imagePath?>";  
+    console.log(imagePath);              
     form_data.append('file', file_data);          
     $.ajax({
         url: 'upload.php', // point to server-side PHP script 
@@ -123,8 +149,23 @@
         processData: false,
         data: form_data,                         
         type: 'post',
-        success: function(php_script_response){
-        	$('.application_container').css('display','block')
+
+        success: function(data){
+        	data = JSON.parse(data);
+        	if(data.success){
+        		$('.danger').css('display','none')
+        		$('.pro-pic').attr('src', imagePath +'/'+ data.pic);
+        		$('.name').html(data.pdf_details.name);
+        		$('.card_name').html(data.pdf_details.card_name);
+        		$('.card_type').html(data.pdf_details.card_type);
+        		$('.father_name').html(data.pdf_details.father_name);
+        		$('.dob').html(data.pdf_details.dob);
+        		$('.shop_code').html(data.pdf_details.shop_code);
+        		$('.address').html(data.pdf_details.address);
+        		$('.application_container').css('display','block')
+        	}else{
+        		$('.danger').css('display','block')
+        	}        	
         }
      });
 });
@@ -135,7 +176,7 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('.profile-pic').attr('src', e.target.result);
+                $('.qr-pic').attr('src', e.target.result);
             }
     
             reader.readAsDataURL(input.files[0]);

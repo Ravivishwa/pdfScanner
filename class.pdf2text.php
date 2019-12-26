@@ -117,7 +117,6 @@ class PDF2Text {
 
 				// So, we have text data. Decode it.
 				$data = $this->getDecodedStream($stream, $options);
-var_dump($data);die();
 				if (strlen($data)) {
 	                if (preg_match_all("#BT[\n|\r](.*)ET[\n|\r]#ismU", $data . "ET\r", $textContainers)) {
 						$textContainers = @$textContainers[1];
