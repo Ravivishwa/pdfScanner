@@ -1,7 +1,5 @@
 <?php
-// require('TCPDF/tcpdf.php');
 include 'vendor/autoload.php';
-// include('functions.php');
 include ( 'PdfToText/PdfToText.phpclass' ) ;
 use Spatie\PdfToText\Pdf;
 use Stichoza\GoogleTranslate\GoogleTranslate;
@@ -16,10 +14,10 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 		   {
 			for  ( $i = 0 ; $i  <  $image_count ; $i ++ )
 			   {
-				$img		=  $pdf -> Images [$i] ;	
+				$img		=  $pdf -> Images [$i] ;
 				$imgindex 	=  sprintf ( "%02d", $i + 1 ) ;
 				$output_image	=  "$file.$imgindex.jpg" ;
-				$textcolor	=  imagecolorallocate ( $img -> ImageResource, 0, 0, 255 ) ;			
+				$textcolor	=  imagecolorallocate ( $img -> ImageResource, 0, 0, 255 ) ;
 				$img -> SaveAs ( $output_image ) ;
 			    }
 		    }
@@ -28,13 +26,14 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 	function extractText($file){
 		$db = mysqli_connect('localhost', 'root', '', 'multi_login');
 		$userid =$_SESSION['user']['id'];
-		$text = (new Pdf('C:/Users/VIHAAN/Downloads/poppler-0.68.0_x86/poppler-0.68.0/bin/pdftotext.exe'))
+		$text = (new Pdf('C:/wamp64/www/pdfScanner/poppler-0.68.0/bin/pdftotext.exe'))
 		    ->setPdf($file)
 		    ->setOptions(['layout', 'r 96'])
 		    ->addOptions(['f 1'])
-		    ->text();  
+		    ->text();
+		var_dump($text);die;
 	    $tr = new GoogleTranslate('en');
-	    
+
 		$text = $tr->translate($text);
 		$name = trim(substr(explode("Name", $text)[1], 0, strpos(explode("Name", $text)[1], "Fa")));
 		$cname = trim(substr(explode("(UFC)", $text)[1], 0, strpos(explode("Card Number", $text)[1], "Sh")));
@@ -58,12 +57,15 @@ use Stichoza\GoogleTranslate\GoogleTranslate;
 		$a2 = trim(substr($add2[1], 0, strpos($add2[1], "Di")));
 		$a3 = trim(substr($add3[1], 0, strpos($add3[1], "Po")));
 
-		$address = $a1.','.$a2.' '.$a3.', Taluka-'.$taluka.', District-'.$district.', Postal Code-'.$post;	
+		$address = $a1.','.$a2.' '.$a3.', Taluka-'.$taluka.', District-'.$district.', Postal Code-'.$post;
 
 		// var_dump(explode("# Name Gender Birth Date Correlation", $text));die;
-		$query = "INSERT INTO user_data (name, card_name, card_type, father_name,dob,shop_code,address,user_id) 
-						  VALUES('$name', '$cname', '$ctype', '$fname','$dob','$shop_code','$address','$userid')";
-		mysqli_query($db, $query);
+		$query = "INSERT INTO user_data (user_id,name, card_name, card_type, father_name,dob,shop_code,address,year ) 
+						  VALUES('$userid','$name', '$cname', '$ctype', '$fname','$dob','$shop_code','$address','')";
+
+
+//		echo $query;
+		mysqli_query	($db, $query);
 
 		$userDetail = [
 			'name' => $name,

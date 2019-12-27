@@ -25,10 +25,10 @@ body {
 	border: 1px solid #B0C4DE;
 	background: white;
 	border-radius: 0px 0px 10px 10px;
-	height: 600px
+	height: 800px
 }
 
-/*form {	
+/*form {
 	padding: 20px;
 	border: 1px solid #B0C4DE;
 	background: white;
@@ -43,7 +43,7 @@ body {
 }
 .danger {background-color: #f44336;}
 
-.login {	
+.login {
 	padding: 20px;
 	border: 1px solid #B0C4DE;
 	background: white;
@@ -86,18 +86,18 @@ body {
 	border-radius: 5px;
 }
 .error {
-	width: 92%; 
-	margin: 0px auto; 
-	padding: 10px; 
-	border: 1px solid #a94442; 
-	color: #a94442; 
-	background: #f2dede; 
-	border-radius: 5px; 
+	width: 92%;
+	margin: 0px auto;
+	padding: 10px;
+	border: 1px solid #a94442;
+	color: #a94442;
+	background: #f2dede;
+	border-radius: 5px;
 	text-align: left;
 }
 .success {
-	color: #3c763d; 
-	background: #dff0d8; 
+	color: #3c763d;
+	background: #dff0d8;
 	border: 1px solid #3c763d;
 	margin-bottom: 20px;
 }
@@ -109,9 +109,9 @@ body {
 }
 
 .user_pic	 {
-	display: inline-block; 
-	width: 50px; 
-	height: 50px; 
+	display: inline-block;
+	width: 50px;
+	height: 50px;
 	margin: 5px;
 	float: left;
 }
@@ -158,11 +158,11 @@ input[type=button], input[type=submit] {
     height: 100px;
 }
 
-.left { 
-  float: left; 
+.left {
+  float: left;
 }
-.right { 
-  float: right; 
+.right {
+  float: right;
 }
 
 
@@ -194,7 +194,7 @@ div.login header, div.presentation header, div.categories header {
 	padding: 3px 15px;
 	color: white;
 	border-radius: 10px 10px 0 0;
-	
+
 }
 
 div.login section, div.presentation section, div.categories section {
@@ -227,7 +227,7 @@ div.login section input {
   cursor: pointer;
 }
 .memt{
-	  border-collapse:separate; 
+	  border-collapse:separate;
   border-spacing: 0 1em;
 }
 
